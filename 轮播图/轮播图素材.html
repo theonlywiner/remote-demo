@@ -99,14 +99,14 @@
     <div class="slider-footer">
       <p>对人类来说会不会太超前了？</p>
       <ul class="slider-indicator">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li data-id="0" class="active"></li>
+        <li data-id="1"></li>
+        <li data-id="2"></li>
+        <li data-id="3"></li>
+        <li data-id="4"></li>
+        <li data-id="5"></li>
+        <li data-id="6"></li>
+        <li data-id="7"></li>
       </ul>
       <div class="toggle">
         <button class="prev">&lt;</button>
@@ -134,7 +134,11 @@
       p.innerHTML = sliderData[i].title
       footer.style.backgroundColor = sliderData[i].color
       // 跟换小圆点
-      document.querySelector('.slider-indicator .active').classList.remove('active')
+
+      let t = document.querySelector('.slider-indicator .active')
+      if (t) {
+        t.classList.remove('active')
+      }
       document.querySelector(`.slider-indicator li:nth-child(${i + 1})`).classList.add('active')
     }
 
@@ -204,6 +208,26 @@
         // 模拟点击，并且click要加小括号，调用函数
         next.click()
       }, 1000)
+    })
+
+    // 获取li
+    // const lis = document.querySelectorAll('.slider-indicator li')
+    // // 遍历每一个li  添加一个点击事件
+    // lis.forEach((item, index) => {
+    //   item.addEventListener('click', () => {
+    //     i = index
+    //     toggle()
+    //   })
+    // })
+
+    const ul = document.querySelector('.slider-indicator')
+    console.log(ul);
+    ul.addEventListener('click', (e) => {
+      if (e.target.tagName === 'LI') {
+        i = +e.target.dataset.id
+        // console.log(typeof (i));
+        toggle()
+      }
     })
   </script>
 </body>
